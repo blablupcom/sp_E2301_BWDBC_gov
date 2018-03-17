@@ -89,7 +89,6 @@ def convert_mth_strings ( mth_string ):
 
 entity_id = "E2301_BWDBC_gov"
 url = "http://datashare.blackburn.gov.uk/Download/expenditure-exceeding-500"
-proxy = {'http':'http://109.108.153.29:80'}
 ua = {'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.62 Safari/537.36'}
 errors = 0
 data = []
@@ -97,9 +96,7 @@ data = []
 #### READ HTML 1.0
 
 html = requests.get(url, headers=ua)
-print html.headers
 soup = BeautifulSoup(html.text, 'lxml')
-print soup
 
 #### SCRAPE DATA
 
