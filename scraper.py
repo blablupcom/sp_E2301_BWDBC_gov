@@ -40,12 +40,12 @@ def validateFilename(filename):
 
 def validateURL(url):
     try:
-        r = requests.get(url, proxies=proxy)
+        r = requests.get(url)
         count = 1
         while r.status_code == 500 and count < 4:
             print ("Attempt {0} - Status code: {1}. Retrying.".format(count, r.status_code))
             count += 1
-            r = requests.get(url, proxies=proxy)
+            r = requests.get(url)
         sourceFilename = r.headers.get('Content-Disposition')
 
         if sourceFilename:
@@ -96,7 +96,7 @@ data = []
 
 #### READ HTML 1.0
 
-html = requests.get(url, proxies=proxy, headers=ua)
+html = requests.get(url, headers=ua)
 print html.headers
 soup = BeautifulSoup(html.text, 'lxml')
 print soup
@@ -107,7 +107,7 @@ blocks = soup.find_all('h4', attrs = {'class':'grid_4'})
 for block in blocks:
     if'20' in block.a['href']:
         url_csv = 'http://datashare.blackburn.gov.uk' + block.a['href']
-        html_csv = requests.get(url_csv, proxies=proxy, headers=ua)
+        html_csv = requests.get(url_csv, headers=ua)
         soup_csv = BeautifulSoup(html_csv.text, 'lxml')
         block_csv = soup_csv.find('a', attrs = {'class': 'download button green CSV'})['href']
         url = 'http://datashare.blackburn.gov.uk' + block_csv
