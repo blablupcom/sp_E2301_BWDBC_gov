@@ -98,7 +98,7 @@ data = []
 
 html = requests.get(url, proxies=proxy)
 soup = BeautifulSoup(html.text, 'lxml')
-
+print soup
 
 #### SCRAPE DATA
 
