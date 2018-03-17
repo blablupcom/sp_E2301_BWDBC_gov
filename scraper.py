@@ -90,13 +90,13 @@ def convert_mth_strings ( mth_string ):
 entity_id = "E2301_BWDBC_gov"
 url = "http://datashare.blackburn.gov.uk/Download/expenditure-exceeding-500"
 proxy = {'http':'http://109.108.153.29:80'}
-
+ua = {'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.62 Safari/537.36'}
 errors = 0
 data = []
 
 #### READ HTML 1.0
 
-html = requests.get(url, proxies=proxy)
+html = requests.get(url, proxies=proxy, headers=ua)
 soup = BeautifulSoup(html.text, 'lxml')
 print soup
 
@@ -106,7 +106,7 @@ blocks = soup.find_all('h4', attrs = {'class':'grid_4'})
 for block in blocks:
     if'20' in block.a['href']:
         url_csv = 'http://datashare.blackburn.gov.uk' + block.a['href']
-        html_csv = requests.get(url_csv, proxies=proxy)
+        html_csv = requests.get(url_csv, proxies=proxy, headers=ua)
         soup_csv = BeautifulSoup(html_csv.text, 'lxml')
         block_csv = soup_csv.find('a', attrs = {'class': 'download button green CSV'})['href']
         url = 'http://datashare.blackburn.gov.uk' + block_csv
