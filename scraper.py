@@ -97,6 +97,7 @@ data = []
 #### READ HTML 1.0
 
 html = requests.get(url, proxies=proxy, headers=ua)
+print html.headers
 soup = BeautifulSoup(html.text, 'lxml')
 print soup
 
